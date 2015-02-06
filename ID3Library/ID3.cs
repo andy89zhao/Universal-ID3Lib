@@ -516,6 +516,24 @@ namespace ID3Library
             #endregion
         }
 
+
+        public async Task ResetTagHeader(StorageFile sf)
+        {
+            using (var stream = await sf.OpenStreamForWriteAsync())
+            {
+                var outputStream = stream.AsOutputStream();
+
+                // Write Tag
+                DataWriter dataWriter = new DataWriter(outputStream);
+
+                WriteTagHeader(new TagHeader() { Id = "ID3", Version = new byte[] { 3, 0 }, Flags = 0, Size = 0 }, dataWriter);
+
+                await dataWriter.StoreAsync();
+                dataWriter.DetachStream();
+
+            }
+        }
+
         #endregion
 
         #region Tag Header
