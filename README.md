@@ -19,12 +19,12 @@ await id3.GetMusicPropertiesAsync(file);
 ```
 Here "file" is a "StorageFile".
 ####Now simply get the properties:
+```
 string title = id3.Title;
 string album = id3.Album;
 string artist = id3.Artist;
 int rating = id3.rating;    // 0 to 5
 
-```
 // returns null if not found
 BitmapImage albumArt = await id3.GetAlbumArtAsync();
 ```
